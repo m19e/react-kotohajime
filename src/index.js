@@ -34,6 +34,10 @@ function calculateWinner(squares) {
     return null;
 }
 
+function isDraw(squares) {
+    return squares.includes(null);
+}
+
 class Board extends React.Component {
     constructor(props) {
         super(props);
@@ -70,7 +74,11 @@ class Board extends React.Component {
         if (winner) {
             status = "Winner: " + winner;
         } else {
-            status = "Next player: " + (this.state.xIsNext ? "X" : "O");
+            if (!this.state.squares.includes(null)) {
+                status = "Draw";
+            } else {
+                status = "Next player: " + (this.state.xIsNext ? "X" : "O");
+            }
         }
 
         return (
