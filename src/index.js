@@ -34,8 +34,12 @@ function calculateWinner(squares) {
     return null;
 }
 
-function isDraw(squares) {
-    return squares.includes(null);
+function Rematch(props) {
+    return (
+        <button className="rematch" onClick={props.onClick}>
+            Rematch
+        </button>
+    );
 }
 
 class Board extends React.Component {
@@ -68,14 +72,29 @@ class Board extends React.Component {
         );
     }
 
+    reset() {
+        this.setState({
+            squares: Array(9).fill(null),
+            xIsNext: true,
+        });
+    }
+
+    renderRematch(finish) {
+        if (finish) {
+            return <Rematch onClick={() => this.reset()} />;
+        }
+    }
+
     render() {
         const winner = calculateWinner(this.state.squares);
-        let status;
+        let status, finish;
         if (winner) {
             status = "Winner: " + winner;
+            finish = true;
         } else {
             if (!this.state.squares.includes(null)) {
                 status = "Draw";
+                finish = true;
             } else {
                 status = "Next player: " + (this.state.xIsNext ? "X" : "O");
             }
@@ -83,7 +102,9 @@ class Board extends React.Component {
 
         return (
             <div>
-                <div className="status">{status}</div>
+                <div className="status">
+                    {status} {this.renderRematch(finish)}
+                </div>
                 <div className="board-row">
                     {this.renderSquare(0)}
                     {this.renderSquare(1)}
