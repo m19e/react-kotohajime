@@ -18,6 +18,6 @@ export function jumpToPast(step) {
     return { type: JUMP_TO_PAST, step };
 }
 
-export function makeUpGame(finish) {
-    return { type: MAKE_UP_GAME, finish };
+export function makeUpGame() {
+    return { type: MAKE_UP_GAME };
 }
