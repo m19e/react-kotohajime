@@ -152,7 +152,9 @@ export class Game extends React.Component {
             const desc = move ? "Go to move #" + move : "Go to game start";
             return (
                 <li key={move}>
-                    <button onClick={() => this.jumpTo(move)}>{desc}</button>
+                    <button onClick={() => this.props.jumpTo(move)}>
+                        {desc}
+                    </button>
                 </li>
             );
         });
@@ -166,7 +168,7 @@ export class Game extends React.Component {
                 status = "Draw";
                 finish = true;
             } else {
-                status = "Next player: " + (this.state.xIsNext ? "X" : "O");
+                status = "Next player: " + (this.props.xIsNext ? "X" : "O");
             }
         }
 
